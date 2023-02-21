@@ -1,0 +1,91 @@
+@import '../../baseExport.scss';
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  min-height: 252px;
+  padding: 20px 0px;
+  background-color: $neutral-color-bg;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  @media (min-width: 770px) {
+    width: 232px;
+  }
+
+  &__header {
+    padding: 0px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: $bold-font-weight;
+    font-size: $third-font-size;
+    line-height: $third-line-height;
+    text-align: center;
+    @media (min-width: 770px) {
+      text-align: unset;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    font-size: $fourth-font-size;
+    line-height: $fourth-line-height;
+  }
+  &__label:hover {
+    background-color: $hover-color-bg;
+  }
+}
+
+/*------------------*/
+
+.check__input {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.check__box {
+  position: absolute;
+  margin-top: 0.2em;
+  margin-left: -30px;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  box-shadow: 0 0 0 0.1em $primary-color-bg;
+}
+
+/* Checked */
+
+.check__input:checked + .check__box {
+  // background-color: #4a90e2;
+  background-image: url(Shape.svg);
+}
+
+/* Focused */
+
+.check__input:focus + .check__box {
+  box-shadow: 0 0 0 0.1em #4a90e2, 0 0 0 0.2em #7ed321;
+}
+
+/* Disabled */
+
+.check__input:disabled + .check__box {
+  box-shadow: 0 0 0 0.1em #9b9b9b;
+}
+
+.check__input:checked:disabled + .check__box {
+  background-color: #9b9b9b;
+}

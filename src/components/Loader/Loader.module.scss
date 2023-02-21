@@ -1,0 +1,24 @@
+.loader {
+  position: relative;
+  margin: auto;
+
+  &__backdrop {
+  }
+
+  &__model {
+    position: absolute;
+    top: 12px;
+    transition: transform 1.5s ease-in-out;
+  }
+
+  &__model--animate-bottom {
+    transform: translate(-10px, 6px);
+  }
+  &__model--animate-top {
+    transform: translate(10px, -6px);
+  }
+
+  &__model--invisible {
+    visibility: hidden;
+  }
+}

@@ -1,0 +1,68 @@
+@import '../../baseExport.scss';
+.ticket {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: $neutral-color-bg;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  min-height: 184px;
+  width: 100%;
+  @media (min-width: 770px) {
+    width: 502px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__price {
+    color: $primary-color-bg;
+    font-weight: 600;
+    font-size: $header-font-size;
+    line-height: $header-line-height;
+  }
+
+  &__carrier {
+    display: flex;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__column {
+    flex-grow: 1;
+    flex-basis: 33%;
+  }
+
+  &__forth {
+  }
+
+  &__back {
+  }
+
+  &__label {
+    font-size: $first-font-size;
+    color: $secondary-color-font;
+    line-height: $first-line-height;
+    font-weight: $bold-font-weight;
+    letter-spacing: 0.5px;
+  }
+
+  &__data {
+    font-size: $second-font-size;
+    line-height: $second-line-height;
+    font-weight: $bold-font-weight;
+  }
+}

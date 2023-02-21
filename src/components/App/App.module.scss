@@ -1,0 +1,36 @@
+@import '../../baseExport.scss';
+
+.app {
+  display: flex;
+  flex-direction: column;
+
+  &__wrapper {
+    padding: 10px 10px;
+    background-color: $template-color-bg;
+    width: 100%;
+  }
+
+  &__header {
+    display: flex;
+    min-height: 160px;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 15px;
+    @media (min-width: 770px) {
+      flex-direction: row;
+      flex-basis: 750px;
+    }
+  }
+
+  &__sidebar {
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+}

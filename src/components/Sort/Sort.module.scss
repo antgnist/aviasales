@@ -1,0 +1,56 @@
+@import '../../baseExport.scss';
+
+.sort {
+  //убрать
+  min-width: 100%;
+  min-height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  @media (min-width: 770px) {
+    min-width: 502px;
+    gap: 0;
+  }
+
+  &__button {
+    flex-grow: 1;
+    min-height: 50px;
+    text-transform: uppercase;
+    border: 1px solid $secondary-color-border;
+    background-color: $neutral-color-bg;
+    border-radius: 5px 5px 5px 5px;
+    @media (min-width: 770px) {
+      border-right: none;
+      border-radius: 0px;
+    }
+  }
+
+  &__button--active {
+    background-color: $primary-color-bg;
+    color: $alternat-color-font;
+  }
+
+  &__button:first-child {
+    @media (min-width: 770px) {
+      border-radius: 5px 0 0px 5px;
+    }
+  }
+
+  &__button:nth-child(3) {
+    flex-basis: 100%;
+    @media (min-width: 770px) {
+      flex-basis: auto;
+    }
+  }
+
+  &__button:last-child {
+    @media (min-width: 770px) {
+      border-radius: 0px 5px 5px 0px;
+      border-right: 1px solid $secondary-color-border;
+    }
+  }
+
+  &__button:hover:not(.sort__button--active) {
+    background-color: $hover-color-bg;
+  }
+}

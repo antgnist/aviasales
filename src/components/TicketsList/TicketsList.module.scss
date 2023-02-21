@@ -1,0 +1,23 @@
+@import '../../baseExport.scss';
+
+.ticketsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0px;
+
+  &__more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    width: 100%;
+    min-height: 50px;
+    color: #ffff;
+    background: $primary-color-bg;
+    border-radius: 5px;
+    @media (min-width: 770px) {
+      width: 502px;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import './baseExport.scss';
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline-color: #7ed321;
+}
+
+html,
+body {
+  font-family: $primary-font-family;
+  color: $primary-color-font;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: $primary-font-family;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: $primary-color-font;
+  font-family: $primary-font-family;
+  font-style: normal;
+  font-weight: $bold-font-weight;
+  font-size: $buttons-font-size;
+  line-height: $buttons-line-height;
+}
