@@ -1,12 +1,19 @@
 import { combineReducers } from 'redux';
 
 import numReducer from './numReducer';
-import { ticketsReducer, ticketsVisibleReducer } from './ticketsReducer';
+import {
+  ticketsReducer,
+  ticketsCountReducer,
+  ticketsSortReducer,
+  ticketsFilterReducer,
+} from './ticketsReducer';
 
 const rootReducer = combineReducers({
   num: numReducer,
   tickets: ticketsReducer,
-  visibleCount: ticketsVisibleReducer,
+  visibleCount: ticketsCountReducer,
+  sort: ticketsSortReducer,
+  filters: ticketsFilterReducer,
 });
 
 export default rootReducer;

@@ -63,7 +63,7 @@ function App(): JSX.Element {
               test();
             }}
           >
-            Тест
+            Добавить билет
           </button>
         </div>
 

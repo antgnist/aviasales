@@ -14,6 +14,11 @@ export const setVisibleCount = (payload: number) => ({
   payload,
 });
 
-export const setSortPrice = () => ({ type: 'SET_SORT_PRICE' });
+export const setFastSort = () => ({ type: 'SET_FAST_SORT' });
+export const setPriceSort = () => ({ type: 'SET_PRICE_SORT' });
+export const setOptimalSort = () => ({ type: 'SET_OPTIMAL_SORT' });
 
-export const setSortFast = () => ({ type: 'SET_SORT_FAST' });
+export const changeAnyFilter = (payload: string) => ({
+  type: 'CHANGE_ANY_FILTER',
+  payload,
+});

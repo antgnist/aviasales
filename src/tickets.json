@@ -139,6 +139,26 @@
           "stops": ["DOH", "IST"]
         }
       ]
+    },
+    {
+      "price": 699030,
+      "carrier": "AK",
+      "segments": [
+        {
+          "origin": "HKT",
+          "destination": "MOW",
+          "date": "2023-05-19T20:03:06.270Z",
+          "duration": 892,
+          "stops": ["DOH", "DXB", "IST"]
+        },
+        {
+          "origin": "MOW",
+          "destination": "HKT",
+          "date": "2023-11-25T10:23:17.292Z",
+          "duration": 1106,
+          "stops": ["DOH", "IST", "DXB", "DOH"]
+        }
+      ]
     }
   ]
 }
