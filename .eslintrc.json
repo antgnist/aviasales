@@ -22,15 +22,16 @@
   "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "indent": ["error", 2, { "SwitchCase": 1 }],
-    // "jsx-a11y/label-has-associated-control": [
-    //   2,
-    //   {
-    //     "required": { "some": ["nesting", "id"] }
-    //   }
-    // ],
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "default-param-last": "off",
     "@typescript-eslint/default-param-last": "warn",
+    "import/no-import-module-exports": [
+      "error",
+      {
+        "exceptions": ["**/*/index.tsx", "**/*/configureStore.ts"]
+      }
+    ],
     "react/state-in-constructor": 0,
     "react/react-in-jsx-scope": ["off"],
     "react/jsx-uses-react": ["off"],

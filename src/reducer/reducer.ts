@@ -1,19 +1,12 @@
-import { IActions } from '../interfaces/interfaces';
+import { combineReducers } from 'redux';
 
-const reducer = (state = 0, action: IActions) => {
-  switch (action.type) {
-    case 'RND':
-      return state + action.payload!;
+import numReducer from './numReducer';
+import { ticketsReducer, ticketsVisibleReducer } from './ticketsReducer';
 
-    case 'INC':
-      return state + 1;
+const rootReducer = combineReducers({
+  num: numReducer,
+  tickets: ticketsReducer,
+  visibleCount: ticketsVisibleReducer,
+});
 
-    case 'DEC':
-      return state - 1;
-
-    default:
-      return state;
-  }
-};
-
-export default reducer;
+export default rootReducer;

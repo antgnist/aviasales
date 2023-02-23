@@ -1,11 +1,17 @@
 import classes from './Ticket.module.scss';
 import img from './icon.png';
 
-function Ticket() {
+interface ITicket {
+  price: number;
+  durTo: number;
+  durAway: number;
+}
+
+function Ticket({ price, durTo, durAway }: ITicket) {
   return (
     <div className={classes.ticket}>
       <div className={classes.ticket__header}>
-        <div className={classes.ticket__price}>13 400 Р</div>
+        <div className={classes.ticket__price}>{price} Р</div>
         <div className={classes.ticket__carrier}>
           <img width={99} src={img} alt="carrier" />
         </div>
@@ -23,7 +29,7 @@ function Ticket() {
             className={`${classes.ticket__duration} ${classes.ticket__column}`}
           >
             <div className={classes.ticket__label}>В ПУТИ</div>
-            <div className={classes.ticket__data}>21ч 15м</div>
+            <div className={classes.ticket__data}>21ч 15м ({durTo})</div>
           </div>
 
           <div className={`${classes.ticket__stops} ${classes.ticket__column}`}>
@@ -44,7 +50,7 @@ function Ticket() {
             className={`${classes.ticket__duration} ${classes.ticket__column}`}
           >
             <div className={classes.ticket__label}>В ПУТИ</div>
-            <div className={classes.ticket__data}>13ч 20м</div>
+            <div className={classes.ticket__data}>13ч 20м ({durAway})</div>
           </div>
 
           <div className={`${classes.ticket__stops} ${classes.ticket__column}`}>
