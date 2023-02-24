@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+// import { format } from 'date-fns/utc/format';
 import classes from './Ticket.module.scss';
 import img from './icon.png';
 
@@ -16,6 +18,14 @@ interface ITicket {
 
 function Ticket({ price, ToAway }: ITicket) {
   const [to, away] = ToAway;
+
+  const timeZoneOffset = new Date(to.date).getTimezoneOffset() * 60000;
+
+  console.log(new Date(to.date));
+  console.log(
+    'Форматик: ',
+    format(new Date(Date.parse(to.date) + timeZoneOffset), "HH':'"),
+  );
 
   return (
     <div className={classes.ticket}>

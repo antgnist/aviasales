@@ -43,7 +43,7 @@ function TicketsList() {
     return ticketsArr.filter((ticket) => {
       const stopsA = ticket.segments[0].stops.length;
       const stopsB = ticket.segments[1].stops.length;
-      if (activeFilters.includes(stopsA) && activeFilters.includes(stopsB)) {
+      if (activeFilters.includes(stopsA) || activeFilters.includes(stopsB)) {
         return true;
       }
       return false;
@@ -75,9 +75,15 @@ function TicketsList() {
   const quantityForTickets = (ticketsArr: IStateTickets, count: number) =>
     ticketsArr.slice(0, count);
 
-  const visibleTikets = quantityForTickets(
-    sortForTikets(filterForTickets(tickets, filters), sort),
-    visibleCount,
+  const totalVisibleTikets = sortForTikets(
+    filterForTickets(tickets, filters),
+    sort,
+  );
+  const visibleTikets = quantityForTickets(totalVisibleTikets, visibleCount);
+
+  const showMoreBiletsCount = Math.min(
+    totalVisibleTikets.length - visibleTikets.length,
+    5,
   );
 
   return (
@@ -94,13 +100,21 @@ function TicketsList() {
         );
       })}
 
-      <button
-        type="button"
-        className={classes.ticketsList__more}
-        onClick={() => setVisibleCount(5)}
-      >
-        Показать ещё 5 билетов!
-      </button>
+      {totalVisibleTikets.length > visibleTikets.length && (
+        <button
+          type="button"
+          className={classes.ticketsList__more}
+          onClick={() => setVisibleCount(showMoreBiletsCount)}
+        >
+          Показать ещё {showMoreBiletsCount} билет
+          {showMoreBiletsCount === 5 && 'ов'}
+          {(showMoreBiletsCount === 2 ||
+            showMoreBiletsCount === 3 ||
+            showMoreBiletsCount === 4) &&
+            'а'}
+          !
+        </button>
+      )}
     </div>
   );
 }
