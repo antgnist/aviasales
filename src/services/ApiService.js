@@ -1,5 +1,3 @@
-let countTickets = 0;
-
 class ApiService {
   #apiBase = 'https://aviasales-test-api.kata.academy';
 
@@ -57,8 +55,6 @@ class ApiService {
     try {
       const res = await this.getResource('/tickets', `searchId=${searchId}`);
       const formatRes = ApiService.formatTickets(res);
-      countTickets += formatRes.tickets.length;
-      console.log('Считаем билеты: ', countTickets);
       return formatRes;
     } catch (error) {
       console.log(
