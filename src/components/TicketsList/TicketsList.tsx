@@ -32,22 +32,38 @@ function TicketsList() {
   const filterForTickets = (ticketsArr: IStateTickets, nowFilters: IFilter) => {
     if (!Object.values(nowFilters).includes(true)) return [...ticketsArr];
     const mapFilter: IMapFilter = { without: 0, one: 1, two: 2, three: 3 };
-    const activeFilters: (number | undefined)[] = [];
+    const activeSoftFilters: (number | undefined)[] = [];
+    const activeStrictFilters: (number | undefined)[] = [];
 
     Object.keys(nowFilters).forEach((key) => {
       if (nowFilters[key as IFilterKeys] && key !== 'all') {
-        activeFilters.push(mapFilter[key as IFilterKeys]);
+        if (key === 'without') {
+          activeStrictFilters.push(mapFilter[key as IFilterKeys]);
+        } else {
+          activeSoftFilters.push(mapFilter[key as IFilterKeys]);
+        }
       }
     });
 
-    return ticketsArr.filter((ticket) => {
+    const ticketsFilters = ticketsArr.filter((ticket) => {
       const stopsA = ticket.segments[0].stops.length;
       const stopsB = ticket.segments[1].stops.length;
-      if (activeFilters.includes(stopsA) || activeFilters.includes(stopsB)) {
+      if (
+        activeStrictFilters.includes(stopsA) &&
+        activeStrictFilters.includes(stopsB)
+      ) {
+        return true;
+      }
+      if (
+        activeSoftFilters.includes(stopsA) ||
+        activeSoftFilters.includes(stopsB)
+      ) {
         return true;
       }
       return false;
     });
+
+    return ticketsFilters;
   };
 
   const sortForTikets = (ticketsArr: IStateTickets, sortKey: string) => {
@@ -67,7 +83,7 @@ function TicketsList() {
         );
       }
       default: {
-        return tickets;
+        return ticketsArr;
       }
     }
   };
@@ -88,17 +104,9 @@ function TicketsList() {
 
   return (
     <div className={classes.ticketsList}>
-      {visibleTikets.map((ticket) => {
-        const key = ticket.segments
-          ? ticket.carrier +
-            ticket.segments![0].date +
-            ticket.segments![0].origin
-          : crypto.randomUUID();
-
-        return (
-          <Ticket price={ticket.price} ToAway={ticket.segments} key={key} />
-        );
-      })}
+      {visibleTikets.map((ticket) => (
+        <Ticket price={ticket.price} ToAway={ticket.segments} key={ticket.id} />
+      ))}
 
       {totalVisibleTikets.length > visibleTikets.length && (
         <button

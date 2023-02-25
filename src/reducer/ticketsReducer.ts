@@ -1,41 +1,47 @@
 import {
   IActions,
   IActionsFilter,
+  IActionsTickets,
   // IStateGlobal,
   IStateTickets,
   IFilter,
   IFilterKeys,
+  IActionsAddTickets,
 } from '../interfaces/interfaces';
 
 export const ticketsReducer = (
   tickets: IStateTickets = [],
-  action: IActions,
+  action: IActionsAddTickets,
 ) => {
   switch (action.type) {
     case 'TEST':
       return [
         ...tickets,
         {
+          id: crypto.randomUUID(),
           price: 0,
-          carrier: 'test',
+          carrier: 'Тест',
           segments: [
             {
+              origin: '',
               destination: '',
               duration: 1000000,
-              date: crypto.randomUUID(),
-              origin: '',
-              stops: [''],
+              date: '0',
+              stops: [],
             },
             {
               destination: '',
               duration: 0,
-              date: '',
-              origin: '',
-              stops: [''],
+              date: '0',
+              origin: 'Тест',
+              stops: [],
             },
           ],
         },
       ];
+
+    case 'ADD_TICKETS':
+      return [...tickets, ...action.payload];
 
     default:
       return tickets;
@@ -124,5 +130,31 @@ export const ticketsFilterReducer = (
 
     default:
       return filters;
+  }
+};
+
+export const loadingReducer = (loading: boolean = false, action: IActions) => {
+  switch (action.type) {
+    case 'START_LOADING':
+      return true;
+
+    case 'STOP_LOADING':
+      return false;
+
+    default:
+      return loading;
+  }
+};
+
+export const searchIdReducer = (
+  searchId: string = '',
+  action: IActionsTickets,
+) => {
+  switch (action.type) {
+    case 'SET_SEARCH_ID':
+      return action.payload;
+
+    default:
+      return searchId;
   }
 };

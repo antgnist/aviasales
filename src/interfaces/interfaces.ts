@@ -1,6 +1,6 @@
-export interface ITiket {
-  price: number;
-}
+// export interface ITiket {
+//   price: number;
+// }
 
 export interface IStateGlobal {
   visibleCount?: number;
@@ -10,6 +10,7 @@ export interface IStateGlobal {
 }
 
 export type IStateTickets = {
+  id: string;
   price: number;
   carrier: string;
   segments: {
@@ -31,9 +32,25 @@ export interface IFilter {
 
 export type IFilterKeys = 'all' | 'without' | 'one' | 'two' | 'three';
 
+export interface IApiPackTicketsResponse {
+  tickets: IStateTickets;
+  stop: boolean;
+  error?: boolean;
+}
+
 export interface IActions {
   type: string;
   payload?: number;
+}
+
+export interface IActionsTickets {
+  type: string;
+  payload: string;
+}
+
+export interface IActionsAddTickets {
+  type: string;
+  payload: IStateTickets;
 }
 
 export interface IActionsFilter {

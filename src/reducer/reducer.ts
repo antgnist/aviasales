@@ -6,6 +6,8 @@ import {
   ticketsCountReducer,
   ticketsSortReducer,
   ticketsFilterReducer,
+  loadingReducer,
+  searchIdReducer,
 } from './ticketsReducer';
 
 const rootReducer = combineReducers({
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
   visibleCount: ticketsCountReducer,
   sort: ticketsSortReducer,
   filters: ticketsFilterReducer,
+  loading: loadingReducer,
+  searchId: searchIdReducer,
 });
 
 export default rootReducer;

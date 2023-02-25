@@ -6,16 +6,15 @@ import {
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+import thunkMiddleware from 'redux-thunk';
 import { IStateGlobal } from './interfaces/interfaces';
 import loggerMiddleware from './middlewares/loggerMiddleware';
 import rootReducer from './reducer/reducer';
 
-import tickets from './tickets.json';
-
-// import thunkMiddleware from 'redux-thunk';
+// import tickets from './tickets.json';
 
 const configureStore = (preloadedState?: IStateGlobal) => {
-  const middlewares = [loggerMiddleware]; // thunkMiddleware
+  const middlewares = [loggerMiddleware, thunkMiddleware];
   const middlewareEnhancer = applyMiddleware(...middlewares);
 
   const enhancers = [middlewareEnhancer];
@@ -32,7 +31,7 @@ const configureStore = (preloadedState?: IStateGlobal) => {
   return store;
 };
 
-const store = configureStore(tickets);
+const store = configureStore();
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export default store;

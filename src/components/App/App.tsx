@@ -1,6 +1,5 @@
 import cn from 'classnames';
-import { useState, useMemo } from 'react';
-// import { useEffect } from 'react';
+import { useMemo } from 'react';
 // import ApiService from '../../services/ApiService';
 
 import { bindActionCreators } from 'redux';
@@ -13,13 +12,12 @@ import TicketsList from '../TicketsList';
 import classes from './App.module.scss';
 
 function App(): JSX.Element {
-  const [loading, setLoading] = useState(false);
   const clazz = cn({ [`${classes.app}`]: true });
-
+  const loading = useAppSelector((state) => state.loading);
   const counter = useAppSelector((state) => state.num);
   const tickets = useAppSelector((state) => state.tickets);
   const dispatch = useAppDispatch();
-  const { inc, dec, rnd, test } = useMemo(
+  const { inc, dec, rnd, test, getAuthorization, stopLoading } = useMemo(
     () => bindActionCreators(actions, dispatch),
     [dispatch],
   );
@@ -65,13 +63,22 @@ function App(): JSX.Element {
           >
             Добавить билет
           </button>
+          <button
+            style={{ backgroundColor: 'pink' }}
+            type="button"
+            onClick={() => {
+              getAuthorization();
+            }}
+          >
+            ПАЧКУ БИЛЕТОВ
+          </button>
         </div>
 
         <button
           style={{ backgroundColor: 'red' }}
           type="button"
           onClick={() => {
-            setLoading((oldL) => !oldL);
+            stopLoading();
             console.log(tickets);
           }}
         >
