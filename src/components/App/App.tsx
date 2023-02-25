@@ -1,10 +1,10 @@
 import cn from 'classnames';
-import { useMemo } from 'react';
-// import ApiService from '../../services/ApiService';
-
+import { useEffect, useMemo } from 'react';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/actions';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+
+import Error from '../Errors/Error';
 import Filters from '../Filters';
 import Loader from '../Loader';
 import Sort from '../Sort';
@@ -13,77 +13,32 @@ import classes from './App.module.scss';
 
 function App(): JSX.Element {
   const clazz = cn({ [`${classes.app}`]: true });
+  const error = useAppSelector((state) => state.error);
   const loading = useAppSelector((state) => state.loading);
-  const counter = useAppSelector((state) => state.num);
-  const tickets = useAppSelector((state) => state.tickets);
   const dispatch = useAppDispatch();
-  const { inc, dec, rnd, test, getAuthorization, stopLoading } = useMemo(
+  const { ticketsAfterAuth } = useMemo(
     () => bindActionCreators(actions, dispatch),
     [dispatch],
   );
+  useEffect(() => {
+    ticketsAfterAuth();
+  }, [ticketsAfterAuth]);
 
   return (
     <div className={classes.app__wrapper}>
+      {error && <Error />}
       <div className={clazz}>
-        <div>
-          Состояние: {counter}
-          <button
-            style={{ backgroundColor: 'green' }}
-            type="button"
-            onClick={() => {
-              inc();
-            }}
-          >
-            Увеличить
-          </button>
-          <button
-            style={{ backgroundColor: 'green' }}
-            type="button"
-            onClick={() => {
-              dec();
-            }}
-          >
-            Уменьшить
-          </button>
-          <button
-            style={{ backgroundColor: 'green' }}
-            type="button"
-            onClick={() => {
-              rnd();
-            }}
-          >
-            Рандом
-          </button>
-          <button
-            style={{ backgroundColor: 'yellow' }}
-            type="button"
-            onClick={() => {
-              test();
-            }}
-          >
-            Добавить билет
-          </button>
+        {/* <div>
           <button
             style={{ backgroundColor: 'pink' }}
             type="button"
             onClick={() => {
-              getAuthorization();
+              ticketsAfterAuth();
             }}
           >
             ПАЧКУ БИЛЕТОВ
           </button>
-        </div>
-
-        <button
-          style={{ backgroundColor: 'red' }}
-          type="button"
-          onClick={() => {
-            stopLoading();
-            console.log(tickets);
-          }}
-        >
-          Переключить загрузку
-        </button>
+        </div> */}
         <header className={classes.app__header}>
           <Loader loading={loading} />
         </header>

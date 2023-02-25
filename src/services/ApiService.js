@@ -1,3 +1,5 @@
+let countTickets = 0;
+
 class ApiService {
   #apiBase = 'https://aviasales-test-api.kata.academy';
 
@@ -13,6 +15,14 @@ class ApiService {
     method: 'GET',
     headers: this.headers,
     redirect: 'follow',
+  };
+
+  static formatTickets = (res) => {
+    const formatArr = res.tickets.map((ticket) => ({
+      ...ticket,
+      id: crypto.randomUUID(),
+    }));
+    return { ...res, tickets: formatArr };
   };
 
   getResource = async (
@@ -43,23 +53,18 @@ class ApiService {
     return null;
   };
 
-  static formatTickets = (res) => {
-    const formatArr = res.tickets.map((ticket) => ({
-      ...ticket,
-      id: crypto.randomUUID(),
-    }));
-    return { ...res, tickets: formatArr };
-  };
-
   getPackTickets = async (searchId) => {
     try {
       const res = await this.getResource('/tickets', `searchId=${searchId}`);
       const formatRes = ApiService.formatTickets(res);
+      countTickets += formatRes.tickets.length;
+      console.log('Считаем билеты: ', countTickets);
       return formatRes;
     } catch (error) {
-      console.log('Error with getting a stack of tickets');
+      console.log(
+        'Server error with getting a stack of tickets. Reconnecting...',
+      );
     }
-    // return null;
     return { tickets: [], stop: false, error: true };
   };
 }

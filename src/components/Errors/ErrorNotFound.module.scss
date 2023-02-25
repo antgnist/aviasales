@@ -1,0 +1,18 @@
+@import '../../baseExport.scss';
+
+.errorNotFound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  padding: 35px;
+  background-color: $neutral-color-bg;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  min-height: 184px;
+  width: 100%;
+  @media (min-width: 770px) {
+    width: 502px;
+  }
+}

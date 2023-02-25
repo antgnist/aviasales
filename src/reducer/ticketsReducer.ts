@@ -2,7 +2,6 @@ import {
   IActions,
   IActionsFilter,
   IActionsTickets,
-  // IStateGlobal,
   IStateTickets,
   IFilter,
   IFilterKeys,
@@ -14,32 +13,6 @@ export const ticketsReducer = (
   action: IActionsAddTickets,
 ) => {
   switch (action.type) {
-    case 'TEST':
-      return [
-        ...tickets,
-        {
-          id: crypto.randomUUID(),
-          price: 0,
-          carrier: 'Тест',
-          segments: [
-            {
-              origin: '',
-              destination: '',
-              duration: 1000000,
-              date: '0',
-              stops: [],
-            },
-            {
-              destination: '',
-              duration: 0,
-              date: '0',
-              origin: 'Тест',
-              stops: [],
-            },
-          ],
-        },
-      ];
-
     case 'ADD_TICKETS':
       return [...tickets, ...action.payload];
 
@@ -143,6 +116,17 @@ export const loadingReducer = (loading: boolean = false, action: IActions) => {
 
     default:
       return loading;
+  }
+};
+
+export const errorReducer = (error: boolean = false, action: IActions) => {
+  switch (action.type) {
+    case 'HAVE_ERROR':
+      return true;
+    case 'CLEAN_ERROR':
+      return false;
+    default:
+      return error;
   }
 };
 

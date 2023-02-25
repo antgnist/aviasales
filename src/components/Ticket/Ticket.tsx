@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import classes from './Ticket.module.scss';
-import img from './icon.png';
+// import img from './icon.png';
 
 interface IToAway {
   origin: string;
@@ -12,6 +12,7 @@ interface IToAway {
 
 interface ITicket {
   price: number;
+  carrier: string;
   ToAway: IToAway[];
 }
 
@@ -42,8 +43,9 @@ const minToTime = (duration: number) => {
   return `${daysView} ${hoursView} ${minutesView}`.trim();
 };
 
-function Ticket({ price, ToAway }: ITicket) {
+function Ticket({ price, carrier, ToAway }: ITicket) {
   const [to, away] = ToAway;
+  const img = `https://pics.avs.io/99/36/${carrier}.png`;
 
   const timeZoneOffset = new Date(to.date).getTimezoneOffset() * 60000;
   const toOrigTime = format(

@@ -7,6 +7,8 @@ import {
   IFilter,
   IFilterKeys,
 } from '../../interfaces/interfaces';
+import ErrorNotFound from '../Errors/ErrorNotFound';
+import InitialLoader from '../InitialLouder';
 import Ticket from '../Ticket/Ticket';
 import classes from './TicketsList.module.scss';
 
@@ -23,6 +25,7 @@ function TicketsList() {
   const visibleCount = useAppSelector((state) => state.visibleCount);
   const sort = useAppSelector((state) => state.sort);
   const filters = useAppSelector((state) => state.filters);
+  const loading = useAppSelector((state) => state.loading);
   const dispatch = useAppDispatch();
   const { setVisibleCount } = useMemo(
     () => bindActionCreators(actions, dispatch),
@@ -104,10 +107,17 @@ function TicketsList() {
 
   return (
     <div className={classes.ticketsList}>
-      {visibleTikets.map((ticket) => (
-        <Ticket price={ticket.price} ToAway={ticket.segments} key={ticket.id} />
-      ))}
+      {!loading && visibleTikets.length <= 0 && <ErrorNotFound />}
+      {loading && visibleTikets.length <= 0 && <InitialLoader />}
 
+      {visibleTikets.map((ticket) => (
+        <Ticket
+          price={ticket.price}
+          carrier={ticket.carrier}
+          ToAway={ticket.segments}
+          key={ticket.id}
+        />
+      ))}
       {totalVisibleTikets.length > visibleTikets.length && (
         <button
           type="button"

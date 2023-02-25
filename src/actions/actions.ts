@@ -7,15 +7,6 @@ import ApiService from '../services/ApiService';
 
 const apiService = new ApiService();
 
-export const inc = () => ({ type: 'INC' });
-
-export const dec = () => ({ type: 'DEC' });
-
-export const rnd = () => ({
-  type: 'RND',
-  payload: Math.floor(Math.random() * 10),
-});
-
 export const setVisibleCount = (payload: number) => ({
   type: 'SET_VISIBLE_COUNT',
   payload,
@@ -30,8 +21,6 @@ export const changeAnyFilter = (payload: string) => ({
   payload,
 });
 
-export const test = () => ({ type: 'TEST' });
-
 export const addTickets = (payload: IStateTickets) => ({
   type: 'ADD_TICKETS',
   payload,
@@ -40,20 +29,24 @@ export const addTickets = (payload: IStateTickets) => ({
 export const startLoading = () => ({ type: 'START_LOADING' });
 export const stopLoading = () => ({ type: 'STOP_LOADING' });
 
+export const haveError = () => ({ type: 'HAVE_ERROR' });
+
 export const setSearchId = (payload: string) => ({
   type: 'SET_SEARCH_ID',
   payload,
 });
 
-export const getAuthorization = () => async (dispatch: AppDispatch) => {
+export const ticketsAfterAuth = () => async (dispatch: AppDispatch) => {
   dispatch(startLoading());
   const searchId = await apiService.getSearchId();
   if (searchId === null) {
     dispatch(stopLoading());
+    dispatch(haveError());
     // выдать ещё сообщение об ошибке
   } else {
     dispatch(setSearchId(searchId));
 
+    // // для запроса только одной пачки
     // const response: IApiPackTicketsResponse = await apiService.getPackTickets(
     //   searchId,
     // );

@@ -1,12 +1,10 @@
-// export interface ITiket {
-//   price: number;
-// }
-
 export interface IStateGlobal {
+  tickets: IStateTickets;
   visibleCount?: number;
   sort?: string;
-  num?: number;
-  tickets: IStateTickets;
+  filters?: IFilter;
+  loading?: boolean;
+  searchId?: string;
 }
 
 export type IStateTickets = {
