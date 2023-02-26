@@ -57,9 +57,7 @@ class ApiService {
       const formatRes = ApiService.formatTickets(res);
       return formatRes;
     } catch (error) {
-      console.log(
-        'Server error with getting a stack of tickets. Reconnecting...',
-      );
+      console.log('Server error with getting a stack of tickets');
     }
     return { tickets: [], stop: false, error: true };
   };

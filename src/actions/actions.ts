@@ -42,32 +42,17 @@ export const ticketsAfterAuth = () => async (dispatch: AppDispatch) => {
   if (searchId === null) {
     dispatch(stopLoading());
     dispatch(haveError());
-    // выдать ещё сообщение об ошибке
   } else {
     dispatch(setSearchId(searchId));
-
-    // // для запроса только одной пачки
-    // const response: IApiPackTicketsResponse = await apiService.getPackTickets(
-    //   searchId,
-    // );
-    // if (response.error === true) {
-    //   dispatch(stopLoading());
-    //   // выдать ещё сообщение об ошибке
-    // } else {
-    //   dispatch(addTickets(response.tickets));
-    //   dispatch(stopLoading());
-    // }
-
     let response: IApiPackTicketsResponse;
     do {
       // eslint-disable-next-line no-await-in-loop
       response = await apiService.getPackTickets(searchId);
-      if (response.error === true) {
-        console.log('Произошла ошибка в течение загрузки, продолжаем');
-      } else {
+      if (response.error !== true) {
         dispatch(addTickets(response.tickets));
       }
     } while (response.stop !== true);
+
     dispatch(stopLoading());
   }
 };
