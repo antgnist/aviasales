@@ -72,7 +72,11 @@ function TicketsList() {
   const sortForTikets = (ticketsArr: IStateTickets, sortKey: string) => {
     switch (sortKey) {
       case 'optimal': {
-        return ticketsArr;
+        return [...ticketsArr].sort(
+          (a, b) =>
+            a.price * (a.segments[0].duration + a.segments[1].duration) -
+            b.price * (b.segments[0].duration + b.segments[1].duration),
+        );
       }
       case 'price': {
         return [...ticketsArr].sort((a, b) => a.price - b.price);
