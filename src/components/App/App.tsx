@@ -28,17 +28,6 @@ function App(): JSX.Element {
     <div className={classes.app__wrapper}>
       {error && <Error />}
       <div className={clazz}>
-        {/* <div>
-          <button
-            style={{ backgroundColor: 'pink' }}
-            type="button"
-            onClick={() => {
-              ticketsAfterAuth();
-            }}
-          >
-            ПАЧКУ БИЛЕТОВ
-          </button>
-        </div> */}
         <header className={classes.app__header}>
           <Loader loading={loading} />
         </header>

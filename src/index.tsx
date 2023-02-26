@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import store from './configureStore';
 
-console.log('СТЭЙТ: ', store.getState());
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );

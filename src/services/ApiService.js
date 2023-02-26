@@ -3,7 +3,7 @@ class ApiService {
 
   #searchId = '';
 
-  #qureyAuth = ''; // `searchId=${this.#searchId}`;
+  #qureyAuth = '';
 
   headers = {
     'Content-Type': 'application/json;charset=utf-8',
@@ -46,7 +46,7 @@ class ApiService {
         return res.searchId;
       }
     } catch (error) {
-      console.log('Error with getResource');
+      // console.log('Error with getResource');
     }
     return null;
   };
@@ -57,7 +57,7 @@ class ApiService {
       const formatRes = ApiService.formatTickets(res);
       return formatRes;
     } catch (error) {
-      console.log('Server error with getting a stack of tickets');
+      // console.log('Server error with getting a stack of tickets');
     }
     return { tickets: [], stop: false, error: true };
   };
