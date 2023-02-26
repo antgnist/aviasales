@@ -82,7 +82,7 @@ function TicketsList() {
         return [...ticketsArr].sort((a, b) => a.price - b.price);
       }
       case 'fast': {
-        return [...ticketsArr].sort(
+        return ticketsArr.sort(
           (a, b) =>
             a.segments[0].duration +
             a.segments[1].duration -
@@ -102,6 +102,7 @@ function TicketsList() {
     filterForTickets(tickets, filters),
     sort,
   );
+
   const visibleTikets = quantityForTickets(totalVisibleTikets, visibleCount);
 
   const showMoreBiletsCount = Math.min(
@@ -113,7 +114,6 @@ function TicketsList() {
     <div className={classes.ticketsList}>
       {!loading && visibleTikets.length <= 0 && <ErrorNotFound />}
       {loading && visibleTikets.length <= 0 && <InitialLoader />}
-
       {visibleTikets.map((ticket) => (
         <Ticket
           price={ticket.price}

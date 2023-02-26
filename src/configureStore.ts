@@ -11,8 +11,6 @@ import { IStateGlobal } from './interfaces/interfaces';
 import loggerMiddleware from './middlewares/loggerMiddleware';
 import rootReducer from './reducer/reducer';
 
-// import tickets from './tickets.json';
-
 const configureStore = (preloadedState?: IStateGlobal) => {
   const middlewares = [loggerMiddleware, thunkMiddleware];
   const middlewareEnhancer = applyMiddleware(...middlewares);
