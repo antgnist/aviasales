@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import Error from '../Errors/Error';
 import Filters from '../Filters';
 import Loader from '../Loader';
+import LoaderLine from '../LoaderLine';
 import Sort from '../Sort';
 import TicketsList from '../TicketsList';
 import classes from './App.module.scss';
@@ -20,12 +21,14 @@ function App(): JSX.Element {
     () => bindActionCreators(actions, dispatch),
     [dispatch],
   );
+
   useEffect(() => {
     ticketsAfterAuth();
   }, [ticketsAfterAuth]);
 
   return (
     <div className={classes.app__wrapper}>
+      <LoaderLine loading={loading} />
       {error && <Error />}
       <div className={clazz}>
         <header className={classes.app__header}>

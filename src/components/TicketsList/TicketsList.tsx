@@ -52,12 +52,8 @@ function TicketsList() {
       const stopsA = ticket.segments[0].stops.length;
       const stopsB = ticket.segments[1].stops.length;
       if (
-        activeStrictFilters.includes(stopsA) &&
-        activeStrictFilters.includes(stopsB)
-      ) {
-        return true;
-      }
-      if (
+        (activeStrictFilters.includes(stopsA) &&
+          activeStrictFilters.includes(stopsB)) ||
         activeSoftFilters.includes(stopsA) ||
         activeSoftFilters.includes(stopsB)
       ) {

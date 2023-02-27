@@ -18,6 +18,7 @@
     "react-image-size": "^2.0.0",
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
+    "react-top-loading-bar": "^2.3.1",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "sass": "^1.58.1",

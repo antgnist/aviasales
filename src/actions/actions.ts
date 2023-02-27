@@ -52,7 +52,6 @@ export const ticketsAfterAuth = () => async (dispatch: AppDispatch) => {
         dispatch(addTickets(response.tickets));
       }
     } while (response.stop !== true);
-
     dispatch(stopLoading());
   }
 };

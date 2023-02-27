@@ -106,7 +106,7 @@ export const ticketsFilterReducer = (
   }
 };
 
-export const loadingReducer = (loading: boolean = false, action: IActions) => {
+export const loadingReducer = (loading: boolean = true, action: IActions) => {
   switch (action.type) {
     case 'START_LOADING':
       return true;
