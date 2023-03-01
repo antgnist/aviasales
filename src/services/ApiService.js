@@ -1,3 +1,12 @@
+/* eslint-disable max-classes-per-file */
+class ResponseError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.name = 'ResponseError';
+    this.status = status;
+  }
+}
+
 class ApiService {
   #apiBase = 'https://aviasales-test-api.kata.academy';
 
@@ -26,22 +35,26 @@ class ApiService {
   getResource = async (
     url,
     query = '',
-    headers = this.fetchOptions,
+    controller,
+    options = this.fetchOptions,
     apiBase = this.#apiBase,
   ) => {
-    const res = await fetch(
-      `${apiBase}${url}?${this.#qureyAuth}${query}`,
-      headers,
-    );
+    const res = await fetch(`${apiBase}${url}?${this.#qureyAuth}${query}`, {
+      ...options,
+      signal: controller.signal,
+    });
     if (!res.ok)
-      throw new Error(`Could not fetch ${url}, recieved ${res.status}`);
+      throw new ResponseError(
+        `Could not fetch ${url}, recieved ${res.status}`,
+        res.status,
+      );
     const body = await res.json();
     return body;
   };
 
-  getSearchId = async () => {
+  getSearchId = async (controller) => {
     try {
-      const res = await this.getResource('/search');
+      const res = await this.getResource('/search', '', controller);
       if (res.searchId) {
         return res.searchId;
       }
@@ -51,15 +64,21 @@ class ApiService {
     return null;
   };
 
-  getPackTickets = async (searchId) => {
+  getPackTickets = async (searchId, controller) => {
     try {
-      const res = await this.getResource('/tickets', `searchId=${searchId}`);
+      const res = await this.getResource(
+        '/tickets',
+        `searchId=${searchId}`,
+        controller,
+      );
       const formatRes = ApiService.formatTickets(res);
       return formatRes;
     } catch (error) {
-      // console.log('Server error with getting a stack of tickets');
+      if (error.status === 500) {
+        return { tickets: [], stop: false, skip: true };
+      }
+      return { tickets: [], stop: false, skip: true, error: true };
     }
-    return { tickets: [], stop: false, error: true };
   };
 }
 

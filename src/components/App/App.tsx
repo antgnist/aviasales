@@ -5,6 +5,7 @@ import * as actions from '../../actions/actions';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import Error from '../Errors/Error';
+import ErrorConnection from '../Errors/ErrorConnection';
 import Filters from '../Filters';
 import Loader from '../Loader';
 import LoaderLine from '../LoaderLine';
@@ -29,6 +30,7 @@ function App(): JSX.Element {
   return (
     <div className={classes.app__wrapper}>
       <LoaderLine loading={loading} />
+      <ErrorConnection />
       {error && <Error />}
       <div className={clazz}>
         <header className={classes.app__header}>

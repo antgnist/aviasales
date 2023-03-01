@@ -34,6 +34,7 @@ export interface IApiPackTicketsResponse {
   tickets: IStateTickets;
   stop: boolean;
   error?: boolean;
+  skip?: boolean;
 }
 
 export interface IActions {

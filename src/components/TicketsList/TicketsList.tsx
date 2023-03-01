@@ -7,6 +7,7 @@ import {
   IFilter,
   IFilterKeys,
 } from '../../interfaces/interfaces';
+import ErrorDownload from '../Errors/ErrorDownload';
 import ErrorNotFound from '../Errors/ErrorNotFound';
 import InitialLoader from '../InitialLouder';
 import Ticket from '../Ticket/Ticket';
@@ -108,6 +109,7 @@ function TicketsList() {
 
   return (
     <div className={classes.ticketsList}>
+      <ErrorDownload />
       {!loading && visibleTikets.length <= 0 && <ErrorNotFound />}
       {loading && visibleTikets.length <= 0 && <InitialLoader />}
       {visibleTikets.map((ticket) => (

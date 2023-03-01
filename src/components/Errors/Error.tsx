@@ -1,13 +1,25 @@
-import classes from './Error.module.scss';
+import { Alert } from 'antd';
+// import { useMemo } from 'react';
+// import { bindActionCreators } from 'redux';
+// import * as actions from '../../actions/actions';
+// import { useAppDispatch } from '../../hooks/hooks';
 
 function Error() {
+  // const dispatch = useAppDispatch();
+  // const { cleanConnectionError } = useMemo(
+  //   () => bindActionCreators(actions, dispatch),
+  //   [dispatch],
+  // );
+
   return (
-    <div className={classes.error}>
-      <span className={classes.error__header}>Ошибка приложения</span>
-      <span className={classes.error__body}>
-        Мы уже всё чиним... Попробуйте перезагрузить страницу.
-      </span>
-    </div>
+    <Alert
+      message="Ошибка приложения."
+      description=" Мы уже всё чиним... Попробуйте перезагрузить страницу."
+      type="error"
+      showIcon
+      closable
+      onClose={() => {}}
+    />
   );
 }
 

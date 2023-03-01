@@ -8,6 +8,8 @@ import {
   loadingReducer,
   errorReducer,
   searchIdReducer,
+  errorConnectionReducer,
+  errorDownloadReducer,
 } from './ticketsReducer';
 
 const rootReducer = combineReducers({
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   loading: loadingReducer,
   searchId: searchIdReducer,
   error: errorReducer,
+  errorConnection: errorConnectionReducer,
+  errorDownload: errorDownloadReducer,
 });
 
 export default rootReducer;

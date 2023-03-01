@@ -130,6 +130,34 @@ export const errorReducer = (error: boolean = false, action: IActions) => {
   }
 };
 
+export const errorConnectionReducer = (
+  errorConnection: boolean = false,
+  action: IActions,
+) => {
+  switch (action.type) {
+    case 'HAVE_INTERNET_ERROR':
+      return true;
+    case 'CLEAN_INTERNET_ERROR':
+      return false;
+    default:
+      return errorConnection;
+  }
+};
+
+export const errorDownloadReducer = (
+  errorDownload: boolean = false,
+  action: IActions,
+) => {
+  switch (action.type) {
+    case 'HAVE_DOWNLOAD_ERROR':
+      return true;
+    case 'CLEAN_DOWNLOAD_ERROR':
+      return false;
+    default:
+      return errorDownload;
+  }
+};
+
 export const searchIdReducer = (
   searchId: string = '',
   action: IActionsTickets,
